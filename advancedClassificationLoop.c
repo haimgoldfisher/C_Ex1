@@ -34,14 +34,18 @@ int isArmstrong(int num)
 int isPalindrome(int num)
 {
     int dig = numOfDigits(num);
-    for (int i = dig; i > 0; i--) 
+    int cut = num;
+    int res = 0;
+    int curr = 0;
+    for (int i = dig-1; i >= 0; i--) 
     {
-        int strip = (int)(num % (int)pow(10, i-1)); // the num without first number
-        strip = (int)(strip/10); // the num without last number
-        if ((num%10) != ((int)(num/pow(10, dig-1))))
-        {
-            return False;
-        }
+        curr = cut % 10;
+        res += curr * (int)pow(10, i);
+        cut /= 10;
     }
-    return True;
+    if (sum == num)
+    {
+        return True;
+    }
+    return False;
 }

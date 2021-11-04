@@ -34,18 +34,22 @@ int isArmstrong(int num)
         return isArmstrongREC(num, num, numOfDigits(num));
     }
 
+int reverse(int num, int sum) // rec function to return reversed form of number
+{
+    if (num == 0)
+    {
+        return sum;
+    }
+    sum = (sum*10) + (num%10);
+    return reverse(num/10, sum);
+}    
+
 int isPalindrome(int num)
 {
-    int nOfDig = numOfDigits(num);
-    if (nOfDig == 0 || nOfDig == 1) // trivial / stop condition
+    int reversed = reverse(num);
+    if (num == reversed)
     {
         return True;
     }
-    if ((num%10) != ((int)(num/pow(10, nOfDig-1)))) // the first and last number is not the same
-    {
-        return False;
-    }
-    int strip = (int)(num % (int)pow(10, nOfDig-1)); // the num without first number
-    strip = (int)(strip/10); // the num without last number
-    return isPalindrome(strip); // the recursive call
+    return False;
 }
