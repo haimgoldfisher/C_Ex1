@@ -43,7 +43,7 @@ int isPalindrome(int num)
         res += curr * (int)pow(10, i);
         cut /= 10;
     }
-    if (sum == num)
+    if (res == num)
     {
         return True;
     }

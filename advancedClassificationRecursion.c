@@ -5,6 +5,8 @@
 
 int numOfDigits(int);
 
+int reverse(int, int);
+
 int isArmstrongREC(int, int, int);
 
 int numOfDigits(int n) // a private func to calc num of digits for a number
@@ -46,7 +48,7 @@ int reverse(int num, int sum) // rec function to return reversed form of number
 
 int isPalindrome(int num)
 {
-    int reversed = reverse(num);
+    int reversed = reverse(num, 0);
     if (num == reversed)
     {
         return True;
