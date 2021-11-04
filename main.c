@@ -2,6 +2,8 @@
 # include "NumClass.h"
 # define True 1
 
+int swap(int, int);
+
 int swap(int a, int b) // for a > b case
 {
     int temp = a;
@@ -51,6 +53,6 @@ int main()
             printf(" %d", i);
         }
     }
-    printf("\n")
+    printf("\n");
     return 0;
 }

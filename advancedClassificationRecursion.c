@@ -3,6 +3,10 @@
 #define True 1
 #define False 0
 
+int numOfDigits(int);
+
+int isArmstrongREC(int, int, int);
+
 int numOfDigits(int n) // a private func to calc num of digits for a number
 {
     if (n == 0)

@@ -3,6 +3,8 @@
 #define True 1
 #define False 0
 
+int factorial(int);
+
 int isPrime(int num)
 {
     if (num == 1) // in this task, 1 is prime

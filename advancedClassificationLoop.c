@@ -3,9 +3,10 @@
 #define True 1
 #define False 0
 
+int numOfDigits(int);
+
 int numOfDigits(int n) // a private func to calc num of digits for a number
 {
-    // what if the num is nagative??? * -1 ????
     if (n == 0)
     {
         return 1;
