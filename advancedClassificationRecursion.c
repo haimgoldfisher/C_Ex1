@@ -16,11 +16,6 @@ int numOfDigits(int n) // a private func to calc num of digits for a number
     return (int)log10(n)+1; // it returns the number of digits of the number
 }
 
-int isArmstrong(int num)
-    {
-        return isArmstrongREC(num, num, numOfDigits(num));
-    }
-
 int isArmstrongREC(int num, int sum, int nOfDig)
     {
         if (sum == 0 && num == 0) // we checked all nums and the num became zero
@@ -32,6 +27,11 @@ int isArmstrongREC(int num, int sum, int nOfDig)
         sum -= power; // 
         num /= 10; // get rid of the last digit of the number
         return isArmstrongREC(num, sum, nOfDig); // recursive call
+    }
+
+int isArmstrong(int num)
+    {
+        return isArmstrongREC(num, num, numOfDigits(num));
     }
 
 int isPalindrome(int num)
