@@ -42,7 +42,7 @@ int reverse(int num, int sum) // rec function to return reversed form of number
     {
         return sum;
     }
-    sum = (sum*10) + (num%10);
+    sum = (sum*10) + (num%10); // 
     return reverse(num/10, sum);
 }    
 
