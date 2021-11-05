@@ -21,7 +21,7 @@ int main()
         swap(first, second);
     }
     printf("The Armstrong numbers are:");
-    for (i = first; i < second; i++)
+    for (i = first; i < second+1; i++)
     {
         if (isArmstrong(i) == True)
         {
@@ -29,7 +29,7 @@ int main()
         }
     }
     printf("\nThe Palindromes are:");
-    for (i = first; i < second; i++)
+    for (i = first; i < second+1; i++)
     {
         if (isPalindrome(i) == True)
         {
@@ -37,7 +37,7 @@ int main()
         }
     }
     printf("\nThe Prime numbers are:");
-    for (i = first; i < second; i++)
+    for (i = first; i < second+1; i++)
     {
         if (isPrime(i) == True)
         {
@@ -45,7 +45,7 @@ int main()
         }
     }
     printf("\nThe Strong numbers are:");
-        for (i = first; i < second; i++)
+        for (i = first; i < second+1; i++)
     {
         if (isStrong(i) == True)
         {
