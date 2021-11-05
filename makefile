@@ -1,49 +1,54 @@
 CC = gcc
-CFLAGS = -Wall -Werror
 AR = ar
+OBJECTS_MAIN = main.o
 OBJECTS_BASIC = basicClassification.o
-OBJECTS_LOOPS = advancedClassificationLoop.o
-OBJECTS_RECURSION = advancedClassificationRecursion.o
+OBJECTS_REC = advancedClassificationRecursion.o
+OBJECTS_LOOP = advancedClassificationLoop.o
+OBJECTS_HEADER = NumClass.h
+FLAGS = -Wall -g
 
-all: loops recursives recursived loopd mains maindloop maindrec
+all: mains maindloop maindrec loops loopd recursives recursived
 
-loopd: libclassloops.so
+mains: $(OBJECTS_MAIN) libclassrec.a
+	$(CC) $(FLAGS) -o mains $(OBJECTS_MAIN) libclassrec.a -lm
+
+maindloop: $(OBJECTS_MAIN) libclassloops.so
+	$(CC) $(FLAGS) -o maindloop $(OBJECTS_MAIN) ./libclassloops.so -lm
+
+maindrec: $(OBJECTS_MAIN) libclassrec.so
+	$(CC) $(FLAGS) -o maindrec $(OBJECTS_MAIN) ./libclassrec.so -lm
+
 loops: libclassloops.a
-recursived: libclassrec.so
+
 recursives: libclassrec.a
 
-mains: main.o libclassrec.a
-	${CC} ${CFLAGS} main.o -L . -lclassrec -lm -o mains
+loopd: libclassloops.so
 
-maindrec: main.o libclassrec.so
-	${CC} ${CFLAGS} main.o -L . -lclassrec -lm -o maindrec
+recursived: libclassrec.so
 
-maindloop: main.o libclassloops.so
-	${CC} ${CFLAGS} main.o -L . -lclassloops -lm -o maindloop
+libclassloops.a: $(OBJECTS_LOOP) $(OBJECTS_BASIC)
+	 ar -rcs libclassloops.a $(OBJECTS_LOOP) $(OBJECTS_BASIC) # creates static library
 
-libclassloops.so: ${OBJECTS_BASIC} ${OBJECTS_LOOPS}
-	${CC} ${CFLAGS} -shared ${OBJECTS_LOOPS} ${OBJECTS_BASIC} -o libclassloops.so
+libclassloops.so: $(OBJECTS_LOOP) $(OBJECTS_BASIC)
+	 $(CC) $(FLAGS) -shared -o libclassloops.so $(OBJECTS_LOOP) $(OBJECTS_BASIC) # creates dynamic library
 
-libclassloops.a: ${OBJECTS_BASIC} ${OBJECTS_LOOPS}
-	${AR} -rcs libclassloops.a  ${OBJECTS_BASIC} ${OBJECTS_LOOPS}
+libclassrec.a: $(OBJECTS_REC) $(OBJECTS_BASIC)
+	 ar -rcs libclassrec.a $(OBJECTS_REC) $(OBJECTS_BASIC) # creates static library
 
-libclassrec.so: ${OBJECTS_BASIC} ${OBJECTS_RECURSION}
-	${CC} ${CFLAGS} -shared ${OBJECTS_BASIC} ${OBJECTS_RECURSION} -o libclassrec.so
-
-libclassrec.a: ${OBJECTS_BASIC} ${OBJECTS_RECURSION}
-	${AR} -rcs libclassrec.a ${OBJECTS_BASIC} ${OBJECTS_RECURSION}
+libclassrec.so: $(OBJECTS_REC) $(OBJECTS_BASIC)
+	 $(CC) $(FLAGS) -shared -o libclassrec.so $(OBJECTS_REC) $(OBJECTS_BASIC) # creates dynamic library
 
 main.o: main.c NumClass.h
-	${CC} ${CFLAGS} -c main.c
+	$(CC) $(FLAGS) -c main.c
 
 basicClassification.o: basicClassification.c
-	${CC} ${CFLAGS} -fPIC -c basicClassification.c
+	$(CC) $(FLAGS) -c basicClassification.c -lm
 
 advancedClassificationLoop.o: advancedClassificationLoop.c
-	${CC} ${CFLAGS} -fPIC -c advancedClassificationLoop.c
+	$(CC) $(FLAGS) -c advancedClassificationLoop.c -lm
 
 advancedClassificationRecursion.o: advancedClassificationRecursion.c
-	${CC} ${CFLAGS} -fPIC -c advancedClassificationRecursion.c
+	$(CC) $(FLAGS) -c advancedClassificationRecursion.c
 
-clean:
-	rm -f *.a *.o *.so  maindrec maindloop mains
+clean: 
+	rm -f *.o *.a *.so mains maindloop maindrec
