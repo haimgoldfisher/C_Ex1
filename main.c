@@ -14,7 +14,7 @@ int swap(int a, int b) // for a > b case
 
 int main()
 {
-    int first, second;
+    int first, second, i;
     scanf("%d %d", &first, &second);
     if (first > second)
     {
